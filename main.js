@@ -60,23 +60,38 @@ function playRound(playerSelection, computerSelection) {
 
 // console.log(game())
 
+document.getElementById('rock').addEventListener('click', function () { playRound('rock',computerPlay()) });
+document.getElementById('paper').addEventListener('click', function () { playRound('paper',computerPlay()) });
+document.getElementById('scissors').addEventListener('click', function () { playRound('scissors',computerPlay()) });
 
-document.getElementById('rock').addEventListener('click', function () { playRound('rock', computerPlay()) });
-document.getElementById('paper').addEventListener('click', function () { playRound('paper', computerPlay()) });
-document.getElementById('scissors').addEventListener('click', function () { playRound('scissors', computerPlay()) });
 
 
 const container = document.querySelector(".container");
 let result = document.createElement("div");
+result.className = "result";
 container.appendChild(result);
 
 function displayResult() {
-    result.innerText = `
+    if (playerScore === 5) {
+        result.innerText = `
+${resultText}
+Your score: ${playerScore}
+Computer's score: ${computerScore}
+CONGRATULATIONS! YOU HAVE WON THE GAME!`
+playerScore = 0
+computerScore = 0
+    } else if (computerScore === 5) {
+        result.innerText = `
+${resultText}
+Your score: ${playerScore}
+Computer's score: ${computerScore}
+SORRY! YOU LOST THE GAME!`
+playerScore = 0
+computerScore = 0
+    } else {
+        result.innerText = `
 ${resultText}
 Your score: ${playerScore}
 Computer's score: ${computerScore}`
-}
-
-function raceToFive() {
-
+    }
 }
